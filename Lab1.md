@@ -52,7 +52,7 @@ The files for this lab appear to be malware specifically a trojan designed to do
 
 
 
-**Network communication to look for:** Communication with 172.26.152.13
+**Network communication to look for:** Communication with 127.26.152.13
 
 
 
@@ -64,7 +64,7 @@ The files for this lab appear to be malware specifically a trojan designed to do
 
 - Scan any Windows machines on the network for `system32\kerne132.dll` or any files with a matching hash
 
-- Block 172.26.152.13 on the firewall
+- Block 127.26.152.13 on the firewall
 
 
 
@@ -83,7 +83,7 @@ Using `strings` on the `.EXE`, we find a few interesting strings. The first one 
 
 
 
-Using `strings` on the `.DLL`, we find a few other interesting functions particularly CreateProcess and Sleep which could be used to hide in the background and act as a backdoor. Additionally, there is an IP address 172.26.152.13 which the book mentions is used for the example but would be an actual malicious IP in real malware.
+Using `strings` on the `.DLL`, we find a few other interesting functions particularly CreateProcess and Sleep which could be used to hide in the background and act as a backdoor. Additionally, there is an IP address 127.26.152.13 which the book mentions is used for the example but would be an actual malicious IP in real malware.
 
 
 
