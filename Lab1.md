@@ -3,7 +3,7 @@
 
 
 
-This week we learned about static analysis and how to use tools to conduct simple static analysis. We learned how to use VirusTotal to see if the samples are picked up by various antivirus tools. We learned how to use strings to find possible null terminated strings in the binaries. We used PEview to view the different sections of the executable. Lastly, we learned how to use dependancy walker to see imported functions by name and by ordinal.
+This week we learned about static analysis and how to use tools to conduct simple static analysis. We learned how to use VirusTotal to see if the samples are picked up by various antivirus tools. We learned how to use `strings` to find possible null terminated strings in the binaries. We used PEview to view the different sections of the executable. Lastly, we learned how to use dependancy walker to see imported functions by name and by ordinal.
 
 
 
@@ -52,7 +52,7 @@ The files for this lab appear to be malware specifically a trojan designed to do
 
 
 
-**Network communication to look for:** Communication with 172.26.152.13
+**Network communication to look for:** Communication with 127.26.152.13
 
 
 
@@ -64,7 +64,7 @@ The files for this lab appear to be malware specifically a trojan designed to do
 
 - Scan any Windows machines on the network for `system32\kerne132.dll` or any files with a matching hash
 
-- Block 172.26.152.13 on the firewall
+- Block 127.26.152.13 on the firewall
 
 
 
@@ -83,7 +83,7 @@ Using `strings` on the `.EXE`, we find a few interesting strings. The first one 
 
 
 
-Using `strings` on the `.DLL`, we find a few other interesting functions particularly CreateProcess and Sleep which could be used to hide in the background and act as a backdoor. Additionally, there is an IP address 172.26.152.13 which the book mentions is used for the example but would be an actual malicious IP in real malware.
+Using `strings` on the `.DLL`, we find a few other interesting functions particularly CreateProcess and Sleep which could be used to hide in the background and act as a backdoor. Additionally, there is an IP address 127.26.152.13 which the book mentions is used for the example but would be an actual malicious IP in real malware.
 
 
 
@@ -184,7 +184,7 @@ Dependency Walker didn't reveal any additional information.
 
 
 
-The file for this lab appears to be a trojan, specifically spyware thanks to results from VirusTotal. No further analysis was able to be conducted however since the file is packed and currently is not able to be unpacked.
+The file for this lab appears to be a trojan, specifically spyware thanks to results from VirusTotal. No further analysis was able to be conducted however since the file is packed using FSG and currently is not able to be unpacked with the tools presented by the book so far.
 
 
 
@@ -215,7 +215,7 @@ The file for this lab appears to be a trojan, specifically spyware thanks to res
 
 
 
-The only indication that this file is malware is the results from VirusTotal since it is packed and is not able to be unpacked currently.
+The main indication that this file is malware is the results from VirusTotal since it is packed and is not able to be unpacked currently. Using PEiD we can see it is packed using FSG a packing software with the last stable version from May 24, 2004 (https://en.wikipedia.org/wiki/Executable_compression#Portable_Executable). The packer site has been preserved by the Wayback Machine at https://web.archive.org/web/20040525022811/http://www.xtreeme.prv.pl/ where you see a clearly malicious site advertizing loaders, encryptors, trojans and more. This website appears to still be functional with the last archive being December 10, 2022 and a visit to the website confirms this. The last bit of information we can find on this malware is when it showed up on VirusTotal which is July 4, 2011 and when VirusTotal thinks it showed up first in the wild which is March 26, 2011.
 
 
 
@@ -231,7 +231,7 @@ The only indication that this file is malware is the results from VirusTotal sin
 
 
 
-The file for this lab appears to be malware specifically a trojan designed to download a malicious file from `www.practicalmalwareanalysis.com/updater.exe`. It additionally views or modifies C:\Windows\system32\wupdmgr.exe. Additionally the resource included in the exe contains another executable that calls URLDownloadToFile.
+The file for this lab appears to be malware specifically a trojan designed to download a malicious file from `www.practicalmalwareanalysis.com/updater.exe`. It calls functions to do additional file modification such as creating and writing new files but also moving them. It also attempts to adjust token privledges and access process tokens. Some of the code is hidden in the resource section specifically the URL and download.
 
 
 
@@ -249,7 +249,7 @@ The file for this lab appears to be malware specifically a trojan designed to do
 
 
 
-**File to look for:** Modification or creation of C:\Windows\system32\wupdmgr.exe
+**File to look for:** Modification or creation of `C:\Windows\system32\wupdmgr.exe`
 
 
 
@@ -264,7 +264,7 @@ The file for this lab appears to be malware specifically a trojan designed to do
 
 - Scan any Windows machines on the network for any files with a matching hash.
 
-- Block `www.malwareanalysisbook.com` on the firewall
+- Block `www.practicalmalwareanalysis.com` on the firewall
 
 
 
@@ -274,19 +274,19 @@ The file for this lab appears to be malware specifically a trojan designed to do
 
 
 
-The malware has one part an executable which when put into VirusTotal is detected by many vendors to be a trojan and specifically a downloader.
+The malware has one part, an executable, which when put into VirusTotal is detected by many vendors to be a trojan and specifically a downloader. The downloader functionality is supported by evidence from `strings` and PEview.
 
 
 
-Using `strings` on the `.EXE`, we find a lot of interesting strings. There are several functions that reveal some of the functionality. CreateFile and WriteFile show that this malware will add files to the file system and write them. It also uses AdjustTokenPrivledges meaning it will attempt to change its privilege level. Strings also finds URLDownloadToFile and `www.practicalmalwareanalysis.com/updater.exe` indicating that it will probably try to download updater.exe from that website.
+Using `strings` on the `.EXE`, we find a lot of interesting strings. There are several functions that reveal some of the functionality. CreateFile and WriteFile show that this malware will add files to the file system and write them. MoveFile is also interesting as it indicates this program may attempt to change the existing file system. There is one file refered to with a full path, `C:\Windows\system32\wupdmgr.exe` which upon further research is a Windows XP updater executable so this file may be modified or created if it doesn't already exist. Another interesting file reference is `winlogon.exe` which has no file path so it is unclear if it is refereing to the windows logon executable or creating one with that name. It also uses AdjustTokenPrivledges meaning it will attempt to change its privilege level. `strings` also finds URLDownloadToFile and `www.practicalmalwareanalysis.com/updater.exe` indicating that it will probably try to download updater.exe from that website. The functions LoadResource and WinExec also appear and are interesting considering what is found using PEview.
 
 
 
-PEview revealed a hidden program under the .rsrc section as one of the image resources had the structure of a program with its own headers and other sections. This image resource is the one that uses the URLDownloadToFile function which is a common function for downloader malware.
+PEview revealed a hidden program under the .rsrc section as one of the image resources had the structure of a program with its own headers and other sections. This image resource is the one that uses the URLDownloadToFile function which is a common function for downloader malware. It is also probably the one loaded by LoadResource and what WinExec executes.
 
 
 
-Dependency Walker didn't reveal any additional information.
+Dependency Walker verifies all the functions found in `strings` and PEview, however, `strings` shows two dlls Dependency Walker doesn't show. `strings` returns `psapi.dll` and `urlmon.dll` with the `.dll` where the other dlls that do show up in Dependency Walker don't have the `.dll` in  the returned string. This may mean these are being called in a function, possibly LoadLibrary in the code without being linked. It is unclear what these two strings are being used for in this malware.
 
 
 
