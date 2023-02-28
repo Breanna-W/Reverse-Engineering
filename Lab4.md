@@ -95,4 +95,4 @@ EDI is for the destination index and ESI is for the source index and they are us
 
 ## Crackme
 
-To solve this weeks crackme I first opened the program in Ghidra and put it into the code browser to see the deassembled and decompiled code. I started with the `main` function to see where the program begins and I found a function `validate_key` that takes the user input and evaluates it. In this function it checks whether or not the modulus of the input and 1223 is 0. So I assumed the key was any value that is divisible by 1223. It then tested this hypothesis by running the program and entering keys to test it.
+To solve this weeks crackme I first opened the program in Ghidra and put it into the code browser to see the deassembled and decompiled code. I started with the `main` function to see where the program begins and I found a function `validate_key` that takes the user input and evaluates it. In this function it checks whether or not the modulus of the input and 1223 is 0. So I assumed the key was any value that is divisible by 1223. I then tested this hypothesis by running the program and entering keys to test it.
