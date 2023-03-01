@@ -125,15 +125,52 @@ I opened it first in Ghidra and looked at the `main` function. I found where it 
 
 
 
-To solve this crackme, you need to generate a key that .
+To solve this crackme, you need to generate a key that relies on the PID of the process everytime it is run.
 
-My solution is the code below written in python which generates .
+My solution is the code below written in C++ which generates the key given the PID.
 
 `
+#include<cstdio>
+#include<string>
+#include<cstring>
+using namespace std;
+
+void oil(int *param_1, int *param_2)
+{
+  *param_2 = *param_2 ^ 4;
+  *param_1 = *param_1 | 0x2e39f3;
+  return;
+}
+
+int main(int argv, char** argc)
+{
+        if(argv != 2)
+        {
+                printf("Wrong number of arguments, please pass the PID as an 
+argument\n");
+                exit(1);
+        }
+        int PID = stoi(argc[1]);
+        char result [356];
+        int a = 0x35478;
+        const char* b = "7030726e";
+        char d [356];
+        for (int i = 0; i < 7; i = i + 1) {
+                a = PID ^ a;
+                int c = a + b[i] + 0x5c;
+                oil(&a,&c);
+                sprintf(d,"%d",c);
+                size_t e = strlen(d);
+                strncat(result,d,e);
+                a = a << 7;
+        }
+        printf("%s\n", result);
+}
 
 `
 
 How I did it using Ghidra:
 
 
+Again I began by opening it in Ghidra and looking at the main function. We have to first fix it so it will run by editing the if statements which check if it is exactly 1:37 and has PID 1337 which is not possible to guarantee. After those edits I exported it as a new file that will run. Then I noticed two different end functions. One labeled `theEnd` which is the actual goal and `theOtherEnd` which is the lose function. To reach the end we have to get the if statement to be true which means the result of the comparison between a generated key and our input must be 0. We see this result is generated as the result of a loop that does something and uses the PID. The loop is simply doing some calculations and the only variable is the PID so I simply copy pasted that loop to create a program that will generate the correct key given the PID. I then ran the edited file and tested the program by getting the PID using `ps aux`. Passing that to my generator function gives me a key that can then be copy pasted back to the waiting edited file to get the correct message.
 
