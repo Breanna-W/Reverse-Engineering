@@ -64,7 +64,7 @@ To solve this crackme, you need to generate a key based on various rules found i
 
 My solution is the code below written in python which generates a random key that fulfills the rules. The length is limited to 16 characters for simplicity, however, longer keys will work.
 
-`
+```
 import string
 import random
 
@@ -79,7 +79,7 @@ password[3] = '2'
 password[7] = '%'
 password[15] = '*'
 print("".join(password))
-`
+```
 
 How I did it using Ghidra:
 
@@ -107,7 +107,7 @@ To solve this crackme, you need to generate a key based on various rules found i
 
 My solution is the code below written in python which generates a random key that fulfills the rules. The length is limited to 16 characters for simplicity, however, longer keys will work.
 
-`
+```
 import string
 import random
 
@@ -122,7 +122,7 @@ password[10] = 'A'
 password[11] = '*'
 password[13] = '6'
 print("".join(password))
-`
+```
 
 How I did it using Ghidra:
 
@@ -150,7 +150,7 @@ To solve this crackme, you need to generate a key based on various rules found i
 
 My solution is the code below written in python which generates a random key that fulfills the rules.
 
-`
+```
 import string
 import random
 
@@ -168,7 +168,7 @@ while(ord(password[8]) ^ ord(password[7]) < 4):
 while(ord(password[12]) ^ ord(password[8]) ^ ord(password[9]) == 0):
     password[9] = random.choice(letters_and_numbers)
 print("".join(password))
-`
+```
 
 How I did it using Ghidra:
 

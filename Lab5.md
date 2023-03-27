@@ -19,7 +19,7 @@ To solve this crackme, you need to generate a key that follows the rules contain
 
 My solution is the code below written in python which generates all possible keys. For example 01z0-0000-0240-02z0 is a valid key.
 
-`
+```
 valid_chars = [ _ for _ in range(48, 58)]
 valid_chars.extend([_ for _ in range(65, 91)])
 valid_chars.extend([_ for _ in range(97, 123)])
@@ -57,7 +57,7 @@ for c1 in valid_chars:
                                             for c12 in valid_chars:
                                                 print(str(chr(c0)) + str(chr(c1)) + str(chr(c2)) + str(chr(c3)) + str(chr(c4)) + str(chr(c5)) + str(chr(c6)) + str(chr(c7)) + str(chr(c8)) + str(chr(c9)) + str(chr(c10)) + str(chr(c11)) + str(chr(c12)) + str(chr(c13)) + str(chr(c14)) + str(chr(c15)) + str(chr(c16)) + str(chr(c17)) + str(chr(c18)))
 
-`
+```
 
 How I did it using Ghidra:
 
@@ -87,7 +87,7 @@ To solve this crackme, you need to generate a key based on the username (8-12 ch
 
 My solution is the code below written in python which generates a key based on the entered username.
 
-`
+```
 uname = input("Enter a username between 8 and 12 characters: ")
 serial = ""
 
@@ -109,7 +109,7 @@ for c in uname:
 
 shift_index = (len(uname) - 8) * 2
 print(serial[shift_index:shift_index + 8])
-`
+```
 
 How I did it using Ghidra, ltrace, and gdb:
 
@@ -129,7 +129,7 @@ To solve this crackme, you need to generate a key that relies on the PID of the 
 
 My solution is the code below written in C++ which generates the key given the PID.
 
-`
+```
 #include<cstdio>
 #include<string>
 #include<cstring>
@@ -167,7 +167,7 @@ argument\n");
         printf("%s\n", result);
 }
 
-`
+```
 
 How I did it using Ghidra:
 
