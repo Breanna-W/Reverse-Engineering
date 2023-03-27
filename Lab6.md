@@ -87,9 +87,13 @@ I opened the crackme in Ghidra. I found the `main` function and noticed some if 
 
 
 password[0] = 'A'
+
 password[1] = '6'
+
 password[3] = '2'
+
 password[7] = '%'
+
 password[15] = '*'
 
 
@@ -130,9 +134,13 @@ I opened the crackme in Ghidra. I found the `main` function and noticed some if 
 
 
 password[6] = 'Y'
+
 password[8] = '#'
+
 password[10] = 'A'
+
 password[11] = '*'
+
 password[13] = '6'
 
 
@@ -176,9 +184,13 @@ I opened the crackme in Ghidra. I found the `main` function and noticed some if 
 
 
 password[6] = password[1] + password[3] - password[5]
+
 password[6] ^ password[7] < 3
+
 password[10] = password[12]
+
 password[8] ^ password[7] >= 4
+
 password[12] ^ password[8] ^ password[9] != 0
 
 
