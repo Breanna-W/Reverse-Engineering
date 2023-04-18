@@ -52,10 +52,10 @@ Go NMSU RE!
 Screenshots:
 
 
-![code screenshot](Ransomware1-1.png)
-![code screenshot](Ransomware1-2.png)
-![code screenshot](Ransomware1-3.png)
-![code screenshot](Ransomware1-4.png)
+![code screenshot](./screenshots/Ransomware1-1.png)
+![code screenshot](./screenshots/Ransomware1-2.png)
+![code screenshot](./screenshots/Ransomware1-3.png)
+![code screenshot](./screenshots/Ransomware1-4.png)
 
 
 ---
@@ -106,10 +106,10 @@ Go NMSU RE!
 Screenshots:
 
 
-![code screenshot](Ransomware2-1.png)
-![code screenshot](Ransomware2-2.png)
-![code screenshot](Ransomware2-3.png)
-![code screenshot](Ransomware2-4.png)
+![code screenshot](./screenshots/Ransomware2-1.png)
+![code screenshot](./screenshots/Ransomware2-2.png)
+![code screenshot](./screenshots/Ransomware2-3.png)
+![code screenshot](./screenshots/Ransomware2-4.png)
 
 
 ---
@@ -157,7 +157,7 @@ Go NMSU RE!
 Screenshots:
 
 
-![code screenshot](Ransomware3-1.png)
-![code screenshot](Ransomware3-2.png)
-![code screenshot](Ransomware3-3.png)
+![code screenshot](./screenshots/Ransomware3-1.png)
+![code screenshot](./screenshots/Ransomware3-2.png)
+![code screenshot](./screenshots/Ransomware3-3.png)
 
