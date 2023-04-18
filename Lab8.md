@@ -23,9 +23,9 @@ We can see in the following screenshots this code follows the DLL injection step
 
 The process that will be injected into is `explorer.exe`. It is found by looping through processes and checking for which one has a module named `explorer.exe`.
 
-![code screenshot](./screenshots/ProcessSelction1.png)
-![code screenshot](./screenshots/ProcessSelction2.png)
-![code screenshot](./screenshots/ProcessSelction3.png)
+![code screenshot](./screenshots/ProcessSelection1.png)
+![code screenshot](./screenshots/ProcessSelection2.png)
+![code screenshot](./screenshots/ProcessSelection3.png)
 
 3) Identify the entry point of the DLL injection. Where is DllMain?
 
