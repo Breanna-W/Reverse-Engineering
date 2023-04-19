@@ -16,6 +16,13 @@ This week we learned about how DLL Injection works and reverse engineered an exa
 
 We can see in the following screenshots this code follows the DLL injection steps we discussed in class:
 
+1) Process Selection (for loop with process_selection function, more detail in question 2)
+2) Open process and get handle (OpenProcess function)
+3) Allocate extra memory (VirtualAllocEx function)
+4) Write DLL name to memory (WriteProcessMemory function)
+5) Start a new remote thread (CreateRemoteThread function)
+6) DLLMain is run (see question 3)
+
 ![code screenshot](./screenshots/DLLInjection1.png)
 ![code screenshot](./screenshots/DLLInjection2.png)
 
@@ -42,6 +49,6 @@ The malware creates a thread to do something every 60 seconds. The loop that doe
 
 5) What does the malware do every _______ seconds?
 
-The malware creates a thread which creates a message box every 60 seconds. The message box has a title "Practical Malware Analysis %d" and a message "Press OK to reboot"
+The malware creates a thread which creates a message box every 60 seconds. The message box has a title "Practical Malware Analysis %d" where %d is replaced by a  number and a message "Press OK to reboot".
 
 ![code screenshot](./screenshots/MessageBox.png)
