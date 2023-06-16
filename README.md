@@ -13,4 +13,18 @@ The malware samples are all windows malware so a windows virtual machine was set
 Isolation is necessary because working with malware is dangerous as it could spread and infect other machines. The network adapters are turned off to prevent it from communicating across the network and the virtual machine is run on Mac OS so that if it does escape on to the host computer there is less of a chance for the malware to work on the host computer.
 
 ### Tools Installed
-No tools installed yet, this list will be updated.
+* VirusTotal
+* strings (Microsoft Sysinternals)
+* PEview
+* Dependency Walker
+* PEiD
+* process explorer
+* regshot
+* procmon
+* inetsim
+* Wireshark
+* Ghidra
+* ltrace
+* gdb
+* uftrace
+* Python pwntools
